@@ -1,21 +1,9 @@
+import 'package:adv_basics/section3/quiz.dart';
 import 'package:flutter/material.dart';
-import 'package:adv_basics/section3/start_screen.dart';
+// import 'package:adv_basics/section3/start_screen.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Colors.red, Colors.orange],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight)),
-          child: StartScreen(),
-        ),
-      ),
-    ),
-  );
+  runApp(Quiz());
 }
 
 // class MyApp extends StatelessWidget {
