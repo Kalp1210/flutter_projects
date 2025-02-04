@@ -1,10 +1,10 @@
-import 'package:adv_basics/section3/quiz.dart';
-import 'package:flutter/material.dart';
-// import 'package:adv_basics/section3/start_screen.dart';
-
-void main() {
-  runApp(Quiz());
-}
+// Section 3 : Quiz App
+// import 'package:flutter/material.dart';
+// import 'package:adv_basics/section3/start_screen.dart'; // yeh comment hi rakhna hai
+// import 'package:adv_basics/section3/quiz.dart';
+// void main() {
+//   runApp(Quiz());
+// }
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
@@ -21,3 +21,16 @@ void main() {
 //     );
 //   }
 // }
+
+// Section 5: expense tracker
+
+import 'package:flutter/material.dart';
+import 'package:adv_basics/widgets/sectionWidget5/expenses.dart';
+
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Expenses(),
+    ),
+  );
+}

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:adv_basics/data/sectionData3/questions.dart';
 import 'package:adv_basics/section3/questions_summary.dart';
 
-class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswer});
+ class ResultsScreen extends StatelessWidget {
+  const ResultsScreen({super.key, required this.chosenAnswer, required this.onRestart});
+
+  final void Function() onRestart;
 
   final List<String> chosenAnswer;
 
@@ -43,7 +45,7 @@ class ResultsScreen extends StatelessWidget {
             const SizedBox(height: 30),
             QuestionsSummary(summaryData),
             const SizedBox(height: 30),
-            TextButton(onPressed: () {}, child: Text('Restart Quiz'))
+            TextButton(onPressed: onRestart, child: Text('Restart Quiz'))
           ],
         ),
       ),
