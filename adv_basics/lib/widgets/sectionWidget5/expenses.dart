@@ -4,6 +4,15 @@ import 'package:adv_basics/widgets/sectionWidget5/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:adv_basics/models/sectionModels5/expense.dart';
 
+//  Column constraints :
+// 0=>x se means 0 to x
+// widht = 0 => depends on children
+// height = 0 => infinity
+
+//  Row constraints :
+// height =0 => depends on children
+// width =0 => infinity
+
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
   @override
@@ -67,6 +76,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     Widget mainContent = const Center(
       child: Text('No expenses added yet.Start adding some!'),
     );
@@ -87,14 +98,26 @@ class _ExpensesState extends State<Expenses> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                // chart is wrapped in Expanded as in chart.dart we have a column in which we width double.infinity whih takes all the available width but Row also takes all the available width thats y we use expanded
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 }

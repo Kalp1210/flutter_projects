@@ -22,10 +22,11 @@
 //   }
 // }
 
-// Section 5: expense tracker
+// Section 5 and 6: expense tracker
 
 import 'package:flutter/material.dart';
 import 'package:adv_basics/widgets/sectionWidget5/expenses.dart';
+// import 'package:flutter/services.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: Color.fromARGB(255, 96, 59, 181),
@@ -35,6 +36,14 @@ var kDarkColorScheme = ColorScheme.fromSeed(
   seedColor: Color.fromARGB(255, 5, 99, 125),
 );
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+
+// this is so that the app never goes in landscape mode
+  
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]).then((fn) {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -84,4 +93,5 @@ void main() {
       home: Expenses(),
     ),
   );
+  // });
 }
