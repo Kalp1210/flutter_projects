@@ -101,11 +101,11 @@
 //   // });
 // }
 
-// ==================================
+// ============================screens======
 // SECTION 8 AND 9
 // ==================================
 
-import 'package:adv_basics/screens/sectionScreens8/categories.dart';
+import 'package:adv_basics/screens/sectionScreens8/tabs.dart';
 
 import 'package:flutter/material.dart';
 
@@ -131,7 +131,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: CategoiresScreen(),
+      home: TabsScreen(),
       // home: MealsScreen(title: 'someCategory', meals: dummyMeals),
     );
   }
