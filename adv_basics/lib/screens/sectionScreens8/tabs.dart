@@ -1,10 +1,13 @@
-import 'package:adv_basics/data/sectionData8/dummy_data.dart';
+// import 'package:adv_basics/data/sectionData8/dummy_data.dart';
 import 'package:adv_basics/models/sectionModels8/meal.dart';
 import 'package:adv_basics/screens/sectionScreens8/categories.dart';
 import 'package:adv_basics/screens/sectionScreens8/filters.dart';
 import 'package:adv_basics/screens/sectionScreens8/meals.dart';
 import 'package:adv_basics/widgets/sectionWidget8/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:adv_basics/provider/sectionProvider9/meals_provider.dart';
+import 'package:adv_basics/provider/sectionProvider9/favorites_provider.dart';
 
 const kIntialFilters = {
   Filter.glutenFree: false,
@@ -13,18 +16,18 @@ const kIntialFilters = {
   Filter.vegan: false,
 };
 
-class TabsScreen extends StatefulWidget {
+class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
 
   @override
-  State<TabsScreen> createState() {
+  ConsumerState<TabsScreen> createState() {
     return _TabsScreenState();
   }
 }
 
-class _TabsScreenState extends State<TabsScreen> {
+class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
-  final List<Meal> _favoriteMeals = [];
+  // final List<Meal> _favoriteMeals = [];
   Map<Filter, bool> _selectedFilters = kIntialFilters;
 
   void _showInfoMessage(String message) {
@@ -36,21 +39,21 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
-  void _toggleMealFavoriteStatus(Meal meal) {
-    final isExisting = _favoriteMeals.contains(meal);
+  // void _toggleMealFavoriteStatus(Meal meal) {
+  //   final isExisting = _favoriteMeals.contains(meal);
 
-    if (isExisting) {
-      setState(() {
-        _favoriteMeals.remove(meal);
-      });
-      _showInfoMessage('Meal is no longer your favorite');
-    } else {
-      setState(() {
-        _favoriteMeals.add(meal);
-      });
-      _showInfoMessage('Meal is added to your favorite');
-    }
-  }
+  //   if (isExisting) {
+  //     setState(() {
+  //       _favoriteMeals.remove(meal);
+  //     });
+  //     _showInfoMessage('Meal is no longer your favorite');
+  //   } else {
+  //     setState(() {
+  //       _favoriteMeals.add(meal);
+  //     });
+  //     _showInfoMessage('Meal is added to your favorite');
+  //   }
+  // }
 
   void _selectPage(int index) {
     setState(() {
@@ -76,7 +79,9 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final availableMeals = dummyMeals.where((meal) {
+    //  ref is a property of provider and watch is method so as in when the data changes the widget is built again also upar we change Statefulwidget se consumerStatefulwidget
+    final meals = ref.watch(mealsProvider);
+    final availableMeals = meals.where((meal) {
       if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
@@ -94,14 +99,13 @@ class _TabsScreenState extends State<TabsScreen> {
 
     Widget activePage = CategoiresScreen(
       availableMeals: availableMeals,
-      onToggleFavorite: _toggleMealFavoriteStatus,
     );
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      final favoriteMeals = ref.watch(FavoriteMealsProvider);
       activePage = MealsScreen(
-        meals: _favoriteMeals,
-        onToggleFavorite: _toggleMealFavoriteStatus,
+        meals: favoriteMeals,
       );
       activePageTitle = 'Your Favorites';
     }
